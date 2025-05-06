@@ -1,20 +1,24 @@
-# Use Java 21 base image
-FROM eclipse-temurin:21-jdk
+# Use Eclipse Temurin 21 as build image
+FROM eclipse-temurin:21-jdk AS build
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy everything from the project directory to the container
+# Copy all project files
 COPY . .
 
-# Make the Maven wrapper executable
-RUN chmod +x mvnw
+# Give permission and run Maven to build the app without tests
+RUN chmod +x ./mvnw && ./mvnw -DskipTests clean package
 
-# Build the project without running tests
-RUN ./mvnw clean install -DskipTests
+# Use Eclipse Temurin 21 as runtime image
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+# Copy the built JAR from the previous stage
+COPY --from=build /app/target/recipeapi-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose port 8080 (Spring Boot default)
 EXPOSE 8080
 
-# Run the Spring Boot application
-CMD ["./mvnw", "spring-boot:run"]
+# Run the JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]
