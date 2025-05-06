@@ -17,9 +17,8 @@ WORKDIR /app
 # Copy the built JAR from the previous stage
 COPY --from=build /app/target/recipeapi-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose port 8080 (Spring Boot default)
+# Expose a default port (not required but informative)
 EXPOSE 8080
 
-# Run the JAR
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
+# Use Railway's dynamic port variable
+ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${PORT}"]
