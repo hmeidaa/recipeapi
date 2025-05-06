@@ -1,0 +1,15 @@
+com\recipe\recipeapi\controller\AuthController.class
+com\recipe\recipeapi\service\CustomUserDetailsService.class
+com\recipe\recipeapi\model\RegisterRequest.class
+com\recipe\recipeapi\model\AuthRequest.class
+com\recipe\recipeapi\util\JwtTokenUtil.class
+com\recipe\recipeapi\service\RecipeService.class
+com\recipe\recipeapi\model\Recipe.class
+com\recipe\recipeapi\config\SwaggerConfig.class
+com\recipe\recipeapi\repository\UserRepository.class
+com\recipe\recipeapi\model\User.class
+com\recipe\recipeapi\config\SecurityConfig.class
+com\recipe\recipeapi\RecipeapiApplication.class
+com\recipe\recipeapi\security\JwtAuthFilter.class
+com\recipe\recipeapi\controller\RecipeController.class
+com\recipe\recipeapi\repository\RecipeRepository.class
